@@ -13,15 +13,13 @@ import study.cicdpractice.domain.dto.VisitCreateRequest;
 import study.cicdpractice.domain.entity.Visit;
 import study.cicdpractice.repository.VisitRepository;
 
-import java.util.List;
-
 @Controller
 @RequiredArgsConstructor
 public class VisitController {
 
     private final VisitRepository visitRepository;
 
-    @GetMapping("/")
+    @GetMapping("/visit")
     public String home(Model model,
                        @PageableDefault(size = Integer.MAX_VALUE, sort = "visitTime", direction = Sort.Direction.DESC)Pageable pageable) {
         Page<Visit> visits = visitRepository.findAll(pageable);
