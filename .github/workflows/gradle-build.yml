@@ -11,7 +11,6 @@ jobs:
     # 실행 환경 지정 => 우분투 최신 버전
     runs-on: ubuntu-latest
 
-    # Task의 sequence를 명시
     steps:
     - name: Checkout
       uses: actions/checkout@v3
@@ -23,10 +22,25 @@ jobs:
         java-version: '11'
         distribution: 'temurin'
 
-    # 권한 부여
+    # Gradle Build를 위한 권한 부여
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
 
     # Gradle Build (test 제외)
     - name: Build with Gradle
       run: ./gradlew clean build --exclude-task test
+
+    # Docker 이미지 빌드
+    - name: Docker Image Build
+      run: docker build -t ${{ secrets.DOCKERHUB_USERNAME}}/${{ secrets.PROJECT_NAME }} .
+
+    # DockerHub 로그인
+    - name: DockerHub Login
+      uses: docker/login-action@v2
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME}}
+        password: ${{ secrets.DOCKERHUB_PASSWORD}}
+
+    # DockerHub Push
+    - name: DockerHub Push
+      run: docker push ${{ secrets.DOCKERHUB_USERNAME}}/${{ secrets.PROJECT_NAME }}
