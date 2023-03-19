@@ -5,7 +5,6 @@
     <title>방문 기록</title>
 </head>
 <body>
-    <h2>Github CI/CD Practice</h2>
     <form th:method="post" th:action="@{/visit}" th:object="${visitCreateRequest}">
         <div>
             <label th:for="*{visitor}">방문자 이름 : </label>
