@@ -5,7 +5,6 @@
     <title>방문 기록</title>
 </head>
 <body>
-    <h1>수정</h1>
     <form th:method="post" th:action="@{/visit}" th:object="${visitCreateRequest}">
         <div>
             <label th:for="*{visitor}">방문자 이름 : </label>
