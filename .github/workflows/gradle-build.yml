@@ -43,7 +43,7 @@ jobs:
 
     # DockerHub Push
     - name: DockerHub Push
-      run: docker push ${{ secrets.DOCKERHUB_USERNAME}}/${{ secrets.PROJECT_NAME }}
+      run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.PROJECT_NAME }}
 
     # EC2 인스턴스 접속 및 애플리케이션 실행
     - name: Application Run
@@ -56,11 +56,11 @@ jobs:
         script: |
           sudo docker kill ${{ secrets.PROJECT_NAME }}
           sudo docker rm -f ${{ secrets.PROJECT_NAME }}
-          sudo docker pull ${{ secrets.DOCKERHUB_USERNAME}}/${{ secrets.PROJECT_NAME }}
+          sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.PROJECT_NAME }}
 
           sudo docker run -p ${{ secrets.PORT }}:${{ secrets.PORT }} \
           --name ${{ secrets.PROJECT_NAME }} \
           -e SPRING_DATASOURCE_URL=${{ secrets.DB_URL }} \
           -e SPRING_DATASOURCE_USERNAME=${{ secrets.DB_USERNAME }} \
           -e SPRING_DATASOURCE_PASSWORD=${{ secrets.DB_PASSWORD }} \
-          -d ${{ secrets.DOCKERHUB_USERNAME}}/${{ secrets.PROJECT_NAME }}
+          -d ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.PROJECT_NAME }}
