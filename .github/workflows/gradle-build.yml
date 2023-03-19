@@ -1,16 +1,21 @@
+# Workflow 이름
 name: Spring Boot & Gradle CI/CD
 
+# 어떤 이벤트가 발생하면 workflow 실행할 지 명시
 on:
+  # main 브랜치에 push나 pull request 발생 시
   push:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
 
+# 위 이벤트 발생 시 실행될 작업들
 jobs:
   build:
-    # 실행 환경 지정 => 우분투 최신 버전
+    # VM의실행 환경 지정 => 우분투 최신 버전
     runs-on: ubuntu-latest
 
+    # 실행될 jobs를 순서대로 명시
     steps:
     - name: Checkout
       uses: actions/checkout@v3
@@ -30,16 +35,16 @@ jobs:
     - name: Build with Gradle
       run: ./gradlew clean build --exclude-task test
 
-    # Docker 이미지 빌드
-    - name: Docker Image Build
-      run: docker build -t ${{ secrets.DOCKERHUB_USERNAME}}/${{ secrets.PROJECT_NAME }} .
-
     # DockerHub 로그인
     - name: DockerHub Login
       uses: docker/login-action@v2
       with:
         username: ${{ secrets.DOCKERHUB_USERNAME}}
         password: ${{ secrets.DOCKERHUB_PASSWORD}}
+
+    # Docker 이미지 빌드
+    - name: Docker Image Build
+      run: docker build -t ${{ secrets.DOCKERHUB_USERNAME}}/${{ secrets.PROJECT_NAME }} .
 
     # DockerHub Push
     - name: DockerHub Push
