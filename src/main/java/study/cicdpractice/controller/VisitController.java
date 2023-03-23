@@ -19,7 +19,7 @@ public class VisitController {
 
     private final VisitRepository visitRepository;
 
-    @GetMapping("/visit")
+    @GetMapping("")
     public String home(Model model,
                        @PageableDefault(size = Integer.MAX_VALUE, sort = "visitTime", direction = Sort.Direction.DESC)Pageable pageable) {
         Page<Visit> visits = visitRepository.findAll(pageable);
