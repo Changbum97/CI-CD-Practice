@@ -7,7 +7,6 @@ spring:
     database: mysql
     hibernate:
       ddl-auto: update
-
     # JDBC TimeZone Setting
     properties:
       hibernate:
