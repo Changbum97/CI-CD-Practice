@@ -12,5 +12,6 @@ spring:
       hibernate:
         jdbc:
           time_zone: Asia/Seoul
+
 server:
   port: 8082
