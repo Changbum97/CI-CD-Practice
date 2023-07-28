@@ -11,7 +11,7 @@
 
 ## 결과
 
-- [http://ec2-52-79-82-151.ap-northeast-2.compute.amazonaws.com:8082](http://ec2-52-79-82-151.ap-northeast-2.compute.amazonaws.com:8082)
+- [http://ec2-52-79-213-143.ap-northeast-2.compute.amazonaws.com:8082](http://ec2-52-79-213-143.ap-northeast-2.compute.amazonaws.com:8082)
 
 ## CI/CD 파이프라인 구축 순서
 
